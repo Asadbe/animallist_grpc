@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package task;
+
+service ManagingService {
+    rpc CreateTask(Task) returns (FlagResponse) {}
+    rpc UpdateTask(UpdateTaskRequest) returns (FlagResponse) {}
+    rpc SearchTask(SearchTaskRequest) returns (SearchTaskResponse) {}
+
+    rpc DeleteTask(DeleteTaskRequest) returns (FlagResponse) {}
+    rpc GetAllTasks(GetAllRequest) returns (GetAllResponse) {}
+}
+
+message Task {
+    string id =1;
+    string updated_at = 3;
+    string search_at = 8;
+    string deleted_at = 4;
+    string name = 5;
+    string voice = 6;
+    string leg = 7;
+  
+}
+
+message MakeDoneRequest {
+    uint64 id = 1;
+}
+
+
+
+message UpdateTaskRequest{
+    int64 id = 1;
+    Task task = 2;
+}
+message SearchTaskRequest{
+    string id = 1;
+    Task task = 2;
+}
+
+message DeleteTaskRequest{
+    int64 id = 1;
+}
+
+message GetAllRequest {}
+
+message GetAllResponse {
+    repeated Task tasks = 1;
+}
+
+message FlagResponse {
+    bool flag = 1;
+}
+
+message SearchTaskResponse {
+    repeated Task tasks = 1;
+}
